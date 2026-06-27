@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakshmi's Boutique | Editorial Lookbook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Interactive Palette Swapper Definition Classes */
+        .theme-blush {
+            --main-bg: #faf3f2;
+            --card-bg: #ffffff;
+            --accent: #c48b80;
+            --accent-hover: #b37a6f;
+        }
+
+        .theme-mint {
+            --main-bg: #f0f4f1;
+            --card-bg: #ffffff;
+            --accent: #8ba895;
+            --accent-hover: #799683;
+        }
+
+        .theme-lavender {
+            --main-bg: #f3f2f7;
+            --card-bg: #ffffff;
+            --accent: #9b94b8;
+            --accent-hover: #8881a6;
+        }
+
+        body {
+            background-color: var(--main-bg);
+            transition: background-color 0.5s ease;
+        }
+
+        .custom-card {
+            background-color: var(--card-bg);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .dynamic-text {
+            color: var(--accent);
+        }
+
+        .dynamic-bg {
+            background-color: var(--accent);
+        }
+
+        .dynamic-border {
+            border-color: var(--accent);
+        }
+
+        .dynamic-bg-hover:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Custom modern hiding attributes */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="theme-blush text-neutral-800 antialiased font-sans">
+
+    <div id="gender-gate"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-neutral-900/40 backdrop-blur-xl transition-all duration-700">
+        <div
+            class="bg-white p-8 md:p-12 rounded-3xl max-w-xl w-full mx-4 shadow-2xl text-center space-y-8 border border-neutral-100">
+            <div>
+                <span class="text-[10px] font-bold tracking-widest text-neutral-400 uppercase block">Welcome to</span>
+                <h1 class="text-3xl font-serif tracking-widest text-neutral-800 font-bold mt-1">LAKSHMI'S BOUTIQUE</h1>
+                <p class="text-xs text-neutral-500 mt-2">Family-run Trend Setter Since 2014</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button onclick="selectDepartment('women')"
+                    class="p-6 bg-[#faf3f2] hover:ring-2 hover:ring-[#c48b80] rounded-2xl text-left transition-all group">
+                    <span class="block text-xs font-bold text-[#c48b80] tracking-widest">COLLECTION</span>
+                    <span
+                        class="block text-xl font-serif text-neutral-800 font-medium mt-1 group-hover:translate-x-1 transition-transform">Shop
+                        Women &rarr;</span>
+                </button>
+                <button onclick="selectDepartment('kids')"
+                    class="p-6 bg-[#f0f4f1] hover:ring-2 hover:ring-[#8ba895] rounded-2xl text-left transition-all group">
+                    <span class="block text-xs font-bold text-[#8ba895] tracking-widest">COUTURE</span>
+                    <span
+                        class="block text-xl font-serif text-neutral-800 font-medium mt-1 group-hover:translate-x-1 transition-transform">Shop
+                        Kids &rarr;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="min-h-screen flex flex-col lg:flex-row">
+
+        <aside
+            class="lg:w-80 bg-white lg:h-screen lg:sticky lg:top-0 border-b lg:border-b-0 lg:border-r border-neutral-100 p-6 flex flex-col justify-between z-40 shadow-xs">
+            <div class="space-y-8 w-full">
+                <div class="pb-6 border-b border-neutral-100 cursor-pointer" onclick="showGate()">
+                    <h2 class="text-xl font-serif font-bold tracking-widest text-neutral-900 uppercase">Lakshmi's</h2>
+                    <span class="text-[9px] font-bold uppercase tracking-wider text-neutral-400 block">Est. 2014 •
+                        Family Outfit</span>
+                </div>
+
+                <nav
+                    class="flex lg:flex-col overflow-x-auto lg:overflow-x-visible space-x-6 lg:space-x-0 lg:space-y-4 py-2 no-scrollbar text-xs font-bold uppercase tracking-widest text-neutral-500">
+                    <button onclick="switchView('women')" id="nav-women"
+                        class="hover:text-neutral-900 transition-colors text-left border-b-2 lg:border-b-0 lg:border-l-2 border-transparent lg:pl-3 py-1">Women's
+                        Gallery</button>
+                    <button onclick="switchView('kids')" id="nav-kids"
+                        class="hover:text-neutral-900 transition-colors text-left border-b-2 lg:border-b-0 lg:border-l-2 border-transparent lg:pl-3 py-1">Kids'
+                        Showcase</button>
+                    <a href="#featured-spotlights"
+                        class="hover:text-neutral-900 transition-colors whitespace-nowrap lg:pl-3 py-1">Featured
+                        Curations</a>
+                    <a href="#about-heritage"
+                        class="hover:text-neutral-900 transition-colors whitespace-nowrap lg:pl-3 py-1">Our Story</a>
+                </nav>
+            </div>
+
+            <div class="hidden lg:block pt-6 border-t border-neutral-100">
+                <div class="bg-neutral-50 p-4 rounded-2xl flex items-center justify-between">
+                    <div class="flex items-center space-x-3 cursor-pointer" onclick="toggleCartModal()">
+                        <div
+                            class="w-10 h-10 rounded-xl bg-white border border-neutral-200 flex items-center justify-center relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-neutral-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                            <span id="sidebar-cart-badge"
+                                class="absolute -top-1 -right-1 dynamic-bg text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold uppercase tracking-wider text-neutral-400">Your Bag</p>
+                            <p id="sidebar-cart-total" class="text-xs font-serif font-bold text-neutral-800">₹0.00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="flex-1 p-4 md:p-8 lg:p-12 space-y-16 overflow-hidden">
+
+            <header
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-2xl border border-neutral-100 gap-4 shadow-2xs">
+                <div>
+                    <span class="text-[9px] font-bold tracking-widest text-neutral-400 uppercase">Interactive System
+                        Layout Workspace</span>
+                    <h3 class="text-xs font-bold uppercase text-neutral-700 tracking-wider">Customize Pastel Ambiance:
+                    </h3>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="mutateTheme('theme-blush')"
+                        class="w-6 h-6 rounded-full bg-[#c48b80] border-2 border-white ring-1 ring-neutral-200"
+                        title="Blush Palette"></button>
+                    <button onclick="mutateTheme('theme-mint')"
+                        class="w-6 h-6 rounded-full bg-[#8ba895] border-2 border-white ring-1 ring-neutral-200"
+                        title="Mint Palette"></button>
+                    <button onclick="mutateTheme('theme-lavender')"
+                        class="w-6 h-6 rounded-full bg-[#9b94b8] border-2 border-white ring-1 ring-neutral-200"
+                        title="Lavender Palette"></button>
+                </div>
+            </header>
+
+            <section id="featured-spotlights" class="space-y-6">
+                <div class="flex flex-col">
+                    <span class="text-[10px] font-bold uppercase tracking-widest dynamic-text font-serif">Curations
+                        Selection Display</span>
+                    <h2 class="text-2xl font-serif tracking-tight text-neutral-900 font-bold">Featured Collections Spots
+                    </h2>
+                </div>
+
+                <div class="flex space-x-4 overflow-x-auto pb-4 no-scrollbar">
+                    <div
+                        class="min-w-[240px] p-6 bg-white rounded-3xl border border-neutral-100 flex flex-col justify-between h-40 shadow-2xs">
+                        <span class="text-[9px] font-bold uppercase tracking-widest text-neutral-400">Spotlight
+                            01</span>
+                        <h4 class="text-lg font-serif font-bold text-neutral-800">Summer Arrivals Line</h4>
+                        <a href="#active-catalogue-node"
+                            class="text-[11px] font-bold uppercase tracking-wider dynamic-text mt-2 block">Browse Now
+                            &rarr;</a>
+                    </div>
+                    <div
+                        class="min-w-[240px] p-6 bg-white rounded-3xl border border-neutral-100 flex flex-col justify-between h-40 shadow-2xs">
+                        <span class="text-[9px] font-bold uppercase tracking-widest text-neutral-400">Spotlight
+                            02</span>
+                        <h4 class="text-lg font-serif font-bold text-neutral-800">Best Sellers Showcase</h4>
+                        <a href="#active-catalogue-node"
+                            class="text-[11px] font-bold uppercase tracking-wider dynamic-text mt-2 block">Browse Now
+                            &rarr;</a>
+                    </div>
+                    <div
+                        class="min-w-[240px] p-6 bg-white rounded-3xl border border-neutral-100 flex flex-col justify-between h-40 shadow-2xs">
+                        <span class="text-[9px] font-bold uppercase tracking-widest text-neutral-400">Spotlight
+                            03</span>
+                        <h4 class="text-lg font-serif font-bold text-neutral-800">Pastel Co-ord Coordinates</h4>
+                        <a href="#active-catalogue-node"
+                            class="text-[11px] font-bold uppercase tracking-wider dynamic-text mt-2 block">Browse Now
+                            &rarr;</a>
+                    </div>
+                    <div
+                        class="min-w-[240px] p-6 bg-white rounded-3xl border border-neutral-100 flex flex-col justify-between h-40 shadow-2xs">
+                        <span class="text-[9px] font-bold uppercase tracking-widest text-neutral-400">Spotlight
+                            04</span>
+                        <h4 class="text-lg font-serif font-bold text-neutral-800">Formal Editorial Selection</h4>
+                        <a href="#active-catalogue-node"
+                            class="text-[11px] font-bold uppercase tracking-wider dynamic-text mt-2 block">Browse Now
+                            &rarr;</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="active-catalogue-node" class="space-y-8">
+
+                <div
+                    class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-neutral-200">
+                    <div>
+                        <h3 id="catalogue-title" class="text-xl font-serif text-neutral-900 font-bold">Women's Wardrobe
+                            Gallery</h3>
+                        <p class="text-xs text-neutral-400 mt-0.5">Showing premium dynamic items filterable instantly.
+                        </p>
+                    </div>
+                    <div id="filter-pills-row"
+                        class="flex flex-wrap gap-1.5 text-[10px] font-bold uppercase tracking-wider">
+                    </div>
+                </div>
+
+                <div id="editorial-product-grid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+                </div>
+            </section>
+
+            <section id="about-heritage"
+                class="custom-card rounded-3xl p-8 md:p-12 border border-neutral-100 shadow-xs grid md:grid-cols-3 gap-8 items-center">
+                <div class="md:col-span-2 space-y-4">
+                    <span
+                        class="text-[9px] font-bold uppercase tracking-widest px-3 py-1 bg-neutral-100 rounded-full inline-block text-neutral-500">Since
+                        2014 Core</span>
+                    <h3 class="text-3xl font-serif tracking-tight text-neutral-900 font-bold">A Trusted Family Shop &
+                        Trend Setter</h3>
+                    <p class="text-xs text-neutral-500 leading-relaxed max-w-xl">
+                        Lakshmi's Boutique was established in 2014 with a core purpose: to bring curated, trendsetting
+                        aesthetics to your wardrobe. As an authentic family boutique enterprise, we focus on smooth
+                        pastel accents, breathable co-ord sets, premium office/formal lines, and delicate sets tailored
+                        carefully for your children.
+                    </p>
+                </div>
+                <div class="p-6 bg-neutral-50 rounded-2xl text-center border border-dashed border-neutral-300">
+                    <span class="text-3xl font-serif font-bold text-neutral-800">12+</span>
+                    <p class="text-[9px] font-bold text-neutral-400 uppercase tracking-widest mt-1">Years Curating
+                        Fashion</p>
+                </div>
+            </section>
+
+            <footer class="bg-white rounded-3xl p-8 md:p-12 border border-neutral-100 shadow-2xs space-y-12">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="space-y-3">
+                        <h4 class="text-sm font-serif font-bold uppercase tracking-wider text-neutral-900">Lakshmi's
+                            Boutique</h4>
+                        <p class="text-xs text-neutral-400 leading-relaxed max-w-xs">
+                            Premium styling segments across co-ord spaces, sets, formal profiles, and infant items
+                            catalogues since 2014.
+                        </p>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Boutique Desk
+                            Contacts</h4>
+                        <ul class="text-xs text-neutral-600 space-y-1.5">
+                            <li>📍 Location: KR Extension Polytechnic Road Chintamani. 563-125</li>
+                            <li>📞 Line: +91 9036522114</li>
+                            <li>✉️ Mail: support@lakshmisboutique.com</li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="text-[10px] font-bold uppercase tracking-widest text-neutral-400">VIP Lookbook
+                            Registry</h4>
+                        <form
+                            onsubmit="event.preventDefault(); alert('Subscribed to Lakshmi\'s Boutique lookbook alerts!');"
+                            class="flex border border-neutral-200 rounded-xl overflow-hidden bg-neutral-50 p-1">
+                            <input type="email" required placeholder="Electronic address"
+                                class="w-full text-xs px-3 py-2 bg-transparent text-neutral-800 focus:outline-none">
+                            <button type="submit"
+                                class="dynamic-bg dynamic-bg-hover text-white text-xs px-4 rounded-lg font-bold uppercase tracking-wider transition-colors">Join</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div
+                    class="pt-6 border-t border-neutral-100 flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] font-bold tracking-widest text-neutral-400 uppercase">
+                    <p>&copy; 2026 Lakshmi's Boutique. All Rights Reserved.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-neutral-900">Instagram Link</a>
+                        <a href="#" class="hover:text-neutral-900">Facebook Link</a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <div id="cart-drawer-overlay" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-neutral-900/30 backdrop-blur-xs" onclick="toggleCartModal()"></div>
+        <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white flex flex-col shadow-2xl rounded-l-3xl overflow-hidden">
+                <div class="p-6 border-b border-neutral-100 bg-neutral-50 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-base font-serif font-bold text-neutral-900">Your Current Cart Configuration</h3>
+                        <p class="text-[9px] text-neutral-400 uppercase font-bold tracking-wider mt-0.5">Lakshmi's
+                            Boutique Order Desk</p>
+                    </div>
+                    <button onclick="toggleCartModal()"
+                        class="text-neutral-400 hover:text-red-500 text-xl font-bold">&times;</button>
+                </div>
+
+                <div id="cart-items-wrapper" class="flex-1 overflow-y-auto p-6 space-y-4">
+                </div>
+
+                <div class="p-6 bg-neutral-50 border-t border-neutral-100 space-y-3">
+                    <div
+                        class="flex justify-between items-center text-xs font-bold text-neutral-800 uppercase tracking-wider">
+                        <span>Invoice Total Estimated:</span>
+                        <span id="cart-gross-sum" class="text-base font-serif dynamic-text">₹0.00</span>
+                    </div>
+
+                    <button onclick="executeMultiItemWhatsAppCheckout()"
+                        class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl uppercase tracking-widest text-[11px] shadow-sm transition flex items-center justify-center gap-2">
+                        Shop Now / Buy via WhatsApp 💬
+                    </button>
+
+                    <button onclick="shareEntireLiveCart()"
+                        class="w-full bg-white border border-neutral-200 text-neutral-600 font-bold py-2 rounded-xl uppercase tracking-widest text-[9px] hover:bg-neutral-100 transition flex items-center justify-center gap-2">
+                        Share Current Cart Selection 🔗
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="https://wa.me/9036522114?text=Hello%20Lakshmi's%20Boutique!%20I'm%20browsing%20your%20lookbook%20and%20would%20like%20to%20place%20an%20order."
+        target="_blank"
+        class="fixed bottom-6 right-6 z-50 bg-emerald-500 text-white p-4 rounded-full shadow-2xl hover:bg-emerald-600 transition-all duration-300 hover:scale-110 flex items-center justify-center group"
+        title="Order via WhatsApp">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.411 0 11.981 0c3.184.001 6.177 1.242 8.426 3.496 2.248 2.253 3.487 5.244 3.484 8.425-.006 6.635-5.357 11.982-11.93 11.982-2.006-.001-3.98-.506-5.725-1.465L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.42 9.864-9.858.002-2.634-1.023-5.112-2.886-6.978-1.864-1.864-4.341-2.887-6.979-2.889-5.439 0-9.865 4.42-9.87 9.86-.001 1.674.437 3.313 1.266 4.772l-.993 3.623 3.71-.973zm11.218-6.853c-.301-.15-1.78-.879-2.056-.979-.275-.1-.475-.15-.675.15-.199.299-.774.979-.949 1.179-.175.199-.349.224-.65.075-.3-.15-1.265-.467-2.41-1.487-.893-.797-1.496-1.78-1.672-2.08-.175-.299-.018-.462.131-.611.135-.134.301-.349.45-.524.149-.174.199-.299.299-.498.1-.2-.05-.374-.125-.524-.075-.149-.675-1.624-.925-2.224-.244-.589-.493-.51-.675-.519-.173-.009-.371-.01-.57-.01-.198 0-.523.074-.797.373-.275.3-.1.574-.1.574s-.125.249-.125.574c0 .324.048.649.125.873.075.225.424.748.898 1.248.473.499.897.822 1.396 1.121.499.299.823.424 1.272.548.449.125.873.099 1.197.05.324-.05 1.78-.724 2.03-1.424.249-.699.249-1.297.174-1.424-.075-.124-.275-.199-.575-.349z" />
+        </svg>
+        <span
+            class="max-w-0 overflow-hidden group-hover:max-w-xs group-hover:ml-2 transition-all duration-500 ease-in-out whitespace-nowrap text-xs font-bold tracking-wider uppercase">
+            Order via WhatsApp
+        </span>
+    </a>
+
+    <script>
+        const SOURCE_WHATSAPP_PHONE = "9036522114";
+
+        const generalInventoryRegistry = [
+            {
+                id: 1,
+                section: 'women',
+                name: 'Embroidered Mandarin Collar Top',
+                price: 1499,
+                category: 'Tops',
+                img: 'cal.avif'
+            },
+            { id: 2, section: 'women', name: 'Pastel Tailored Linen Co-ord Set', price: 2800, category: 'Co-ord Sets', img: 'images/linen-coord.jpeg' },
+            { id: 3, section: 'women', name: 'Blush Premium Slim Formal Blazer', price: 3600, category: 'Formal Wear', img: 'images/formal-blazer.jpeg' },
+            { id: 4, section: 'women', name: 'Raw Handloom Cotton Set', price: 2199, category: 'Sets', img: 'images/handloom-cotton.jpeg' },
+
+            // --- KIDS ITEMS ---
+            { id: 101, section: 'kids', name: 'Soft Muslin Toddler Play Set', price: 1250, category: 'Sets', img: 'images/muslin-toddler.jpeg' },
+            { id: 102, section: 'kids', name: 'Pastel Lightweight Breathable Top', price: 650, category: 'Tops', img: 'images/pastel-top.jpeg' }
+        ];
+
+        let activeDepartment = 'women';
+        let shoppingCart = [];
+
+        // Helper function to build direct image links for WhatsApp previews
+        function getAbsoluteImageURL(imagePath) {
+            if (!imagePath || imagePath.trim() === "") return "No image provided";
+            // If viewing locally, falls back to placeholder domain name
+            const currentOrigin = window.location.origin.includes('file://') ? 'https://lakshmisboutique.com' : window.location.origin;
+            return `${currentOrigin}/${imagePath}`;
+        }
+
+        function selectDepartment(dept) {
+            activeDepartment = dept;
+            document.getElementById('gender-gate').classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+            buildInterfacePills();
+            renderEditorialGrid('all');
+            highlightActiveNav();
+        }
+
+        function showGate() {
+            document.getElementById('gender-gate').classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+        }
+
+        function switchView(dept) {
+            activeDepartment = dept;
+            buildInterfacePills();
+            renderEditorialGrid('all');
+            highlightActiveNav();
+        }
+
+        function highlightActiveNav() {
+            const btnWomen = document.getElementById('nav-women');
+            const btnKids = document.getElementById('nav-kids');
+
+            btnWomen.classList.remove('text-neutral-900', 'border-neutral-900', 'border-l-2');
+            btnKids.classList.remove('text-neutral-900', 'border-neutral-900', 'border-l-2');
+
+            if (activeDepartment === 'women') {
+                btnWomen.classList.add('text-neutral-900', 'border-neutral-900', 'border-l-2');
+                document.getElementById('catalogue-title').innerText = "Women's Wardrobe Gallery";
+            } else {
+                btnKids.classList.add('text-neutral-900', 'border-neutral-900', 'border-l-2');
+                document.getElementById('catalogue-title').innerText = "Kids' Couture Catalog";
+            }
+        }
+
+        function mutateTheme(className) {
+            document.body.className = `no-scrollbar text-neutral-800 antialiased font-sans ${className}`;
+        }
+
+        function buildInterfacePills() {
+            const pillsContainer = document.getElementById('filter-pills-row');
+            pillsContainer.innerHTML = '';
+
+            const relevantItems = generalInventoryRegistry.filter(i => i.section === activeDepartment);
+            const categoriesSet = new Set(relevantItems.map(i => i.category));
+            const uniqueCategoriesArray = ['all', ...categoriesSet];
+
+            uniqueCategoriesArray.forEach((category, idx) => {
+                const buttonClass = idx === 0
+                    ? 'px-4 py-1.5 dynamic-bg text-white rounded-full'
+                    : 'px-4 py-1.5 bg-white text-neutral-500 border border-neutral-100 rounded-full hover:border-neutral-400';
+
+                pillsContainer.innerHTML += `
+                    <button onclick="filterClick(this, '${category}')" class="filter-pill-unit ${buttonClass} transition-all duration-200">
+                        ${category === 'all' ? 'All Stock Line' : category}
+                    </button>
+                `;
+            });
+        }
+
+        function filterClick(targetButton, categoryValue) {
+            renderEditorialGrid(categoryValue);
+            document.querySelectorAll('.filter-pill-unit').forEach(btn => {
+                btn.className = 'filter-pill-unit px-4 py-1.5 bg-white text-neutral-500 border border-neutral-100 rounded-full hover:border-neutral-400 transition-all duration-200';
+            });
+            targetButton.className = 'filter-pill-unit px-4 py-1.5 dynamic-bg text-white rounded-full transition-all duration-200';
+        }
+
+        function renderEditorialGrid(filterKey = 'all') {
+            const layoutGrid = document.getElementById('editorial-product-grid');
+            layoutGrid.innerHTML = '';
+
+            const scopeProducts = generalInventoryRegistry.filter(item => item.section === activeDepartment && (filterKey === 'all' || item.category === filterKey));
+
+            scopeProducts.forEach(product => {
+                const hasValidImage = product.img && product.img.trim() !== "";
+                const presentationMediaBox = hasValidImage
+                    ? `<img src="${product.img}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 rounded-2xl">`
+                    : `<div class="w-full h-full bg-neutral-50 border border-dashed border-neutral-200 rounded-2xl flex flex-col items-center justify-center p-6 text-center">
+                         <span class="text-[14px] font-bold tracking-widest text-neutral-300 block font-serif">✦ PLACEHOLDER CONTAINER</span>
+                         <p class="text-[9px] text-neutral-400 tracking-wider mt-1 uppercase">Ready for custom clothing Display Photo</p>
+                       </div>`;
+
+                // CHANGE INSTALLED: Appends absolute Image URL line inside message string
+                const absoluteImgLink = getAbsoluteImageURL(product.img);
+                const directLinkString = encodeURIComponent(
+                    `Hello Lakshmi's Boutique! I would like to instantly check sizing parameters and buy this outfit option directly:\n\n` +
+                    `🛍️ *Item:* ${product.name}\n` +
+                    `💰 *Price:* ₹${product.price.toLocaleString('en-IN')}.00\n` +
+                    `🖼️ *Image Preview:* ${absoluteImgLink}`
+                );
+                const directWhatsAppHref = `https://wa.me/${SOURCE_WHATSAPP_PHONE}?text=${directLinkString}`;
+
+                layoutGrid.innerHTML += `
+                    <div class="group flex flex-col justify-between relative bg-white p-4 rounded-3xl border border-neutral-100 shadow-3xs hover:shadow-xs transition-shadow duration-300">
+                        <div>
+                            <div class="h-96 w-full relative overflow-hidden flex items-center justify-center rounded-2xl">
+                                ${presentationMediaBox}
+                                <span class="absolute top-3 left-3 bg-white/90 text-neutral-700 text-[8px] font-bold uppercase tracking-widest px-3 py-1 rounded-md border border-neutral-100">${product.category}</span>
+                            </div>
+                            <div class="mt-4 px-1 space-y-1">
+                                <h4 class="text-xs font-bold uppercase tracking-wider text-neutral-800">${product.name}</h4>
+                                <p class="text-sm font-serif font-bold text-neutral-900">₹${product.price.toLocaleString('en-IN')}.00</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 grid grid-cols-1 gap-1.5 pt-2 border-t border-neutral-50">
+                            <button onclick="addCartItem(${product.id})" class="w-full bg-neutral-50 hover:bg-neutral-900 text-neutral-800 hover:text-white text-[10px] font-bold uppercase tracking-widest py-2.5 rounded-xl transition-all duration-300">Add To Shopping Bag</button>
+                            <a href="${directWhatsAppHref}" target="_blank" class="w-full bg-emerald-600/90 hover:bg-emerald-700 text-white text-[10px] font-bold uppercase tracking-widest py-2 rounded-xl text-center transition-colors flex items-center justify-center gap-1">
+                                Buy Single Unit via WhatsApp 💬
+                            </a>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleCartModal() {
+            document.getElementById('cart-drawer-overlay').classList.toggle('hidden');
+        }
+
+        function addCartItem(id) {
+            const correspondingUnit = generalInventoryRegistry.find(item => item.id === id);
+            const preExistingMatch = shoppingCart.find(entry => entry.product.id === id);
+
+            if (preExistingMatch) {
+                preExistingMatch.quantity += 1;
+            } else {
+                shoppingCart.push({ product: correspondingUnit, quantity: 1 });
+            }
+
+            refreshCartState();
+            toggleCartModal();
+        }
+
+        function modifyVolume(index, step) {
+            shoppingCart[index].quantity += step;
+            if (shoppingCart[index].quantity <= 0) {
+                shoppingCart.splice(index, 1);
+            }
+            refreshCartState();
+        }
+
+        function refreshCartState() {
+            const badge = document.getElementById('sidebar-cart-badge');
+            const totalText = document.getElementById('sidebar-cart-total');
+            const grossSum = document.getElementById('cart-gross-sum');
+            const wrapper = document.getElementById('cart-items-wrapper');
+
+            let totalItems = 0;
+            let totalPrice = 0;
+            wrapper.innerHTML = '';
+
+            shoppingCart.forEach((entry, index) => {
+                totalItems += entry.quantity;
+                const entryTotal = entry.product.price * entry.quantity;
+                totalPrice += entryTotal;
+
+                wrapper.innerHTML += `
+                    <div class="flex items-center justify-between bg-neutral-50 p-3 rounded-2xl border border-neutral-100">
+                        <div class="flex-1 min-w-0 pr-2">
+                            <h4 class="text-xs font-bold text-neutral-800 truncate">${entry.product.name}</h4>
+                            <p class="text-[10px] font-serif font-bold text-neutral-500 mt-0.5">₹${entry.product.price.toLocaleString('en-IN')} × ${entry.quantity}</p>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="modifyVolume(${index}, -1)" class="w-6 h-6 rounded-lg bg-white border border-neutral-200 text-neutral-600 font-bold text-xs flex items-center justify-center hover:bg-neutral-100 transition-colors">-</button>
+                            <span class="text-xs font-bold text-neutral-800 w-4 text-center">${entry.quantity}</span>
+                            <button onclick="modifyVolume(${index}, 1)" class="w-6 h-6 rounded-lg bg-white border border-neutral-200 text-neutral-600 font-bold text-xs flex items-center justify-center hover:bg-neutral-100 transition-colors">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (shoppingCart.length === 0) {
+                wrapper.innerHTML = `
+                    <div class="text-center py-8 text-neutral-400 space-y-2">
+                        <p class="text-xs font-bold uppercase tracking-wider">Your bag is empty</p>
+                        <p class="text-[10px]">Add boutique items from the gallery to begin.</p>
+                    </div>
+                `;
+            }
+
+            badge.innerText = totalItems;
+            totalText.innerText = `₹${totalPrice.toLocaleString('en-IN')}.00`;
+            grossSum.innerText = `₹${totalPrice.toLocaleString('en-IN')}.00`;
+        }
+
+        // CHANGE INSTALLED: Multi-Item bulk checkouts now pull individual absolute image link tags
+        function executeMultiItemWhatsAppCheckout() {
+            if (shoppingCart.length === 0) {
+                alert("Your shopping bag is currently empty!");
+                return;
+            }
+
+            let message = "Hello Lakshmi's Boutique! I would like to place an order for the following lookbook selections:\n\n";
+            let grandTotal = 0;
+
+            shoppingCart.forEach((entry, idx) => {
+                const total = entry.product.price * entry.quantity;
+                grandTotal += total;
+                const absoluteImgLink = getAbsoluteImageURL(entry.product.img);
+
+                message += `${idx + 1}. *${entry.product.name}*\n`;
+                message += `   Qty: ${entry.quantity} | Price: ₹${entry.product.price.toLocaleString('en-IN')} | Subtotal: ₹${total.toLocaleString('en-IN')}\n`;
+                message += `   🔗 View Photo: ${absoluteImgLink}\n\n`;
+            });
+
+            message += `*Estimated Invoice Total:* ₹${grandTotal.toLocaleString('en-IN')}.00\n\n`;
+            message += "Please let me know about availability and sizing updates. Thanks!";
+
+            window.open(`https://wa.me/${SOURCE_WHATSAPP_PHONE}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function shareEntireLiveCart() {
+            if (shoppingCart.length === 0) {
+                alert("Your shopping bag is empty. Add items before sharing your selection!");
+                return;
+            }
+
+            let summary = "My Curated Picks from Lakshmi's Boutique Lookbook:\n";
+            shoppingCart.forEach(entry => {
+                summary += `- ${entry.product.name} (Qty: ${entry.quantity})\n`;
+            });
+
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(summary)
+                    .then(() => alert("Lookbook cart selection copied to clipboard! Share it anywhere."))
+                    .catch(() => alert("Could not automatically copy text. Summary:\n" + summary));
+            } else {
+                alert("Cart Summary:\n" + summary);
+            }
+        }
+
+        window.onload = function () {
+            buildInterfacePills();
+            renderEditorialGrid('all');
+            highlightActiveNav();
+        }
+    </script>
+</body>
+
+</html>
